@@ -55,12 +55,17 @@ def read_csv():
 
 # Sidebar como menu
 st.sidebar.title("Menu")
-page = st.sidebar.selectbox("Escolha a página:", ["Home", "Modelo", "Novas Predições"])
+page = st.sidebar.selectbox("Escolha a página:", ["Início", "Modelo", "Novas Predições"])
 
 # Conteúdo principal muda conforme o menu
-if page == "Home":
-    st.title("Bem-vindo!")
-    st.write("Essa é a página inicial do app.")
+if page == "Início":
+    st.title("Início")
+    st.write("Foram analisadas 75 amostras, pré-processadas com Savitzky-Golay, 7 pontos.")
+
+    df = read_csv()
+    df
+    
+
 elif page == "Modelo":
     st.title("Modelo de Regressão")
     st.write("Aqui você pode treinar ou testar seu modelo.")
