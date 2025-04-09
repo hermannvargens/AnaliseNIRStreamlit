@@ -62,24 +62,23 @@ def plotar_graf():
     # Carregar o dataframe
     df = pd.read_csv("espectros_derivada.csv", delimiter=";")
     
-    # Extrair dados espectrais (da 4ª coluna em diante)
+    # Separar dados espectrais a partir da 4ª coluna
     df_espectros = df.iloc[:, 3:]
+    df_espectros = df_espectros.T  # Transpor para ter comprimentos de onda no eixo X
     
-    # Transpor
-    df_espectros = df_espectros.T
-    
-    # Plotar gráfico
+    # Gráfico
     st.subheader("Gráfico de Absorbância por Comprimento de Onda")
+    
     fig, ax = plt.subplots(figsize=(10, 5))
     
-    ax.plot(df_espectros.index, df_espectros)
+    for column in df_espectros.columns:
+        ax.plot(df_espectros.index, df_espectros[column], label=column)
     
     ax.set_xlabel("Wavelength")
     ax.set_ylabel("Absorbance")
     ax.grid(True)
     ax.set_xticks(np.arange(0, len(df_espectros.index), 10))
-    ax.legend()
-    
+    # ax.legend()  # Descomente se quiser legenda
     st.pyplot(fig)
 
 # Sidebar como menu
