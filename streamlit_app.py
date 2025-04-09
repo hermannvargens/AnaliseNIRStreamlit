@@ -31,6 +31,28 @@ def process_csv(file):
     
     return df
 
+def read_csv():
+    # Carregar os dados e excluir colunas desnecessárias
+    df = pd.read_csv("espectros_derivada.csv", delimiter=";")
+    df = df[:-3]
+    
+    # Substituir '.' por '' e ',' por '.' nos nomes das colunas
+    df.columns = [col.replace('.', '').replace(',', '.') for col in df.columns]
+    
+    # substituir o ponto por '' e a virgula por ponto em todas as colunas do df
+    for col in df.columns:
+        if df[col].dtype == 'object':  # Check if the column contains strings
+            df[col] = df[col].str.replace('.', '', regex=False).str.replace(',', '.', regex=False)
+        #For numeric columns with decimal separators as '.' and ','
+        elif pd.api.types.is_numeric_dtype(df[col]):
+            df[col] = df[col].astype(str).str.replace('.', '', regex=False).str.replace(',', '.', regex=False).astype(float)
+    
+    # Transformar todas as colunas para float
+    for col in df.columns:
+      df[col] = df[col].astype(float)
+
+    return df
+
 # Sidebar como menu
 st.sidebar.title("Menu")
 page = st.sidebar.selectbox("Escolha a página:", ["Home", "Modelo", "Novas Predições"])
