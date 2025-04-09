@@ -98,6 +98,8 @@ if page == "Início":
 
     df = read_csv()
     df
+
+    plotar_graf()
     
 
 elif page == "Modelo":
