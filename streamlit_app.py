@@ -67,17 +67,12 @@ def plotar_graf():
     
     # Transpor
     df_espectros = df_espectros.T
-
-    # Sidebar: seleção de colunas (amostras) para visualizar
-    colunas_disponiveis = df_espectros.columns.tolist()
-    #colunas_selecionadas = st.sidebar.multiselect("Selecione as amostras para visualizar", colunas_disponiveis, default=colunas_disponiveis[:5])
     
     # Plotar gráfico
     st.subheader("Gráfico de Absorbância por Comprimento de Onda")
     fig, ax = plt.subplots(figsize=(10, 5))
     
-    for column in colunas_selecionadas:
-        ax.plot(df_espectros.index, df_espectros[column], label=column)
+    ax.plot(df_espectros.index, df_espectros)
     
     ax.set_xlabel("Wavelength")
     ax.set_ylabel("Absorbance")
