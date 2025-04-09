@@ -7,11 +7,11 @@ import matplotlib.pyplot as plt
 # Função para carregar o modelo PLS salvo
 @st.cache_resource
 def load_model():
-    #model = joblib.load('pls.joblib') 
+    model = joblib.load('pls.joblib') 
     #model = joblib.load('knn_normalizado.joblib')
     #model = joblib.load('knn_nao_normalizado.joblib')
     #model = joblib.load('rfr.joblib')
-    model = joblib.load('svr_normalizado.joblib')
+    #model = joblib.load('svr_normalizado.joblib')
     #model = joblib.load('svr_nao_normalizado.joblib')
     return model
 
@@ -49,7 +49,7 @@ if uploaded_file is not None:
     #y_pred = model.predict(X) # se não for normalizado
 
     #########se for normalizado
-    obj = joblib.load('svr_normalizado.joblib')
+    obj = joblib.load('pls.joblib')
     model = obj['model']
     scaler_X = obj['scaler_X']
     scaler_y = obj['scaler_y']
