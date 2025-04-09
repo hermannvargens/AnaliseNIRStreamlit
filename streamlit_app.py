@@ -60,7 +60,7 @@ def plotar_graf():
     st.title("Visualização de Dados Espectrais")
 
     # Carregar o dataframe
-    df = pd.read_csv("espectros_derivada.csv", delimiter=";")
+    df = pd.read_csv()
     
     # Separar dados espectrais a partir da 4ª coluna
     df_espectros = df.iloc[:, 3:]
