@@ -55,27 +55,37 @@ def read_csv():
     return df
 
 #Função para plotar o gráfico do arquivo CSV usado para a modelagem
+# Título do app
+def plotar_graf()
+    st.title("Visualização de Dados Espectrais")
 
-# Dividir o df, tomando da 4ª coluna em diante, onde estão os valores de Absorbance
-df_espectros = df.iloc[:, 3:]
+    # Carregar o dataframe
+    df = pd.read_csv("espectros_derivada.csv", delimiter=";")
+    
+    # Extrair dados espectrais (da 4ª coluna em diante)
+    df_espectros = df.iloc[:, 3:]
+    
+    # Transpor
+    df_espectros = df_espectros.T
 
-# Transpor os dados
-df_espectros = df_espectros.T
-
-# Plotar todos os valores
-plt.figure(figsize=(10,5))
-
-for column in df_espectros.columns:
-    plt.plot(df_espectros.index, df_espectros[column], label=column)
-
-plt.xlabel("Wavelength")
-plt.ylabel("Absorbance")
-#plt.title("Spectral Data")
-#plt.legend()
-plt.grid(True)
-plt.xticks(np.arange(0, len(df_espectros.index), 10))
-plt.tight_layout()
-plt.show()
+    # Sidebar: seleção de colunas (amostras) para visualizar
+    colunas_disponiveis = df_espectros.columns.tolist()
+    colunas_selecionadas = st.sidebar.multiselect("Selecione as amostras para visualizar", colunas_disponiveis, default=colunas_disponiveis[:5])
+    
+    # Plotar gráfico
+    st.subheader("Gráfico de Absorbância por Comprimento de Onda")
+    fig, ax = plt.subplots(figsize=(10, 5))
+    
+    for column in colunas_selecionadas:
+        ax.plot(df_espectros.index, df_espectros[column], label=column)
+    
+    ax.set_xlabel("Wavelength")
+    ax.set_ylabel("Absorbance")
+    ax.grid(True)
+    ax.set_xticks(np.arange(0, len(df_espectros.index), 10))
+    ax.legend()
+    
+    st.pyplot(fig)
 
 # Sidebar como menu
 st.sidebar.title("Menu")
