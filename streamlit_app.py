@@ -56,7 +56,7 @@ def read_csv():
 
 #Função para plotar o gráfico do arquivo CSV usado para a modelagem
 # Título do app
-def plotar_graf()
+def plotar_graf():
     st.title("Visualização de Dados Espectrais")
 
     # Carregar o dataframe
