@@ -79,9 +79,6 @@ if uploaded_file is not None:
     # Exibir o gráfico no Streamlit
     st.pyplot(fig)
 
-    # Fazer previsões com o modelo
-    y_pred = model.predict(X)
-
      # Exibir previsões
     st.subheader("Previsões feitas pelo modelo (xÁgua, xEtanol, xDEC):")
     st.dataframe(pd.DataFrame(y_pred, columns=['xAgua_pred', 'xEtanol_pred', 'xDEC_pred']))
