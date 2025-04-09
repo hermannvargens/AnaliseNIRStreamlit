@@ -31,6 +31,7 @@ def process_csv(file):
     
     return df
 
+#Função para ler o arquivo CSV utilizado para a modelagem
 def read_csv():
     # Carregar os dados e excluir colunas desnecessárias
     df = pd.read_csv("espectros_derivada.csv", delimiter=";")
@@ -52,6 +53,29 @@ def read_csv():
       df[col] = df[col].astype(float)
 
     return df
+
+#Função para plotar o gráfico do arquivo CSV usado para a modelagem
+
+# Dividir o df, tomando da 4ª coluna em diante, onde estão os valores de Absorbance
+df_espectros = df.iloc[:, 3:]
+
+# Transpor os dados
+df_espectros = df_espectros.T
+
+# Plotar todos os valores
+plt.figure(figsize=(10,5))
+
+for column in df_espectros.columns:
+    plt.plot(df_espectros.index, df_espectros[column], label=column)
+
+plt.xlabel("Wavelength")
+plt.ylabel("Absorbance")
+#plt.title("Spectral Data")
+#plt.legend()
+plt.grid(True)
+plt.xticks(np.arange(0, len(df_espectros.index), 10))
+plt.tight_layout()
+plt.show()
 
 # Sidebar como menu
 st.sidebar.title("Menu")
