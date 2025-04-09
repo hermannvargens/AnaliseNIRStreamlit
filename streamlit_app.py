@@ -31,58 +31,72 @@ def process_csv(file):
     
     return df
 
-# Início da interface do Streamlit
-st.title('Previsões com PLS Regression')
+# Sidebar como menu
+st.sidebar.title("Menu")
+page = st.sidebar.selectbox("Escolha a página:", ["Home", "Modelo", "Novas Predições"])
 
-# Carregar o modelo PLS
-model = load_model()
-
-# Upload do arquivo CSV
-uploaded_file = st.file_uploader("Carregue o arquivo CSV com os dados de entrada", type=["csv"])
-
-if uploaded_file is not None:
-    # Processar o arquivo CSV
-    df = process_csv(uploaded_file)
-    st.write("Dados carregados:")
-    st.write(df)
-
-    X = df.values
-    #y_pred = model.predict(X) # se não for normalizado
-
-    #########se for normalizado
-    obj = joblib.load('pls_normalizado.joblib')
-    model = obj['model']
-    scaler_X = obj['scaler_X']
-    scaler_y = obj['scaler_y']
+# Conteúdo principal muda conforme o menu
+if page == "Home":
+    st.title("Bem-vindo!")
+    st.write("Essa é a página inicial do app.")
+elif page == "Modelo":
+    st.title("Modelo de Regressão")
+    st.write("Aqui você pode treinar ou testar seu modelo.")
+    # Você pode adicionar sliders, selects, gráficos, etc.
+elif page == "Novas Predições":
+    st.title("Novas Predições")
+    st.write("Aplicação de regressão usando Streamlit.")
+    # Carregar o modelo PLS
+    model = load_model()
     
-    X_input = scaler_X.transform(X)
-    y_pred = model.predict(X_input)
-    y_pred = scaler_y.inverse_transform(y_pred)
-    #########
-
-    # Plotar espectro no Streamlit
-    st.subheader("Gráfico do Espectro ")
+    # Upload do arquivo CSV
+    uploaded_file = st.file_uploader("Carregue o arquivo CSV com os dados de entrada", type=["csv"])
     
-    step = 5
-    x_values = np.arange(0, len(df.columns), step)
-    x_labels = [str(i) for i in range(0, len(df.columns), step)]
+    if uploaded_file is not None:
+        # Processar o arquivo CSV
+        df = process_csv(uploaded_file)
+        st.write("Dados carregados:")
+        st.write(df)
     
-    fig, ax = plt.subplots(figsize=(10, 6))
-    ax.plot(df.iloc[0, :])
+        X = df.values
+        #y_pred = model.predict(X) # se não for normalizado
     
-    ax.set_xticks(x_values)
-    ax.set_xticklabels(x_labels, rotation=45, ha="right")
+        #########se for normalizado
+        obj = joblib.load('pls_normalizado.joblib')
+        model = obj['model']
+        scaler_X = obj['scaler_X']
+        scaler_y = obj['scaler_y']
+        
+        X_input = scaler_X.transform(X)
+        y_pred = model.predict(X_input)
+        y_pred = scaler_y.inverse_transform(y_pred)
+        #########
     
-    ax.grid(True)
-    ax.set_title("Espectro")
-    ax.set_xlabel("Absorvância")
-    ax.set_ylabel("Wavelength (nm)")
+        # Plotar espectro no Streamlit
+        st.subheader("Gráfico do Espectro ")
+        
+        step = 5
+        x_values = np.arange(0, len(df.columns), step)
+        x_labels = [str(i) for i in range(0, len(df.columns), step)]
+        
+        fig, ax = plt.subplots(figsize=(10, 6))
+        ax.plot(df.iloc[0, :])
+        
+        ax.set_xticks(x_values)
+        ax.set_xticklabels(x_labels, rotation=45, ha="right")
+        
+        ax.grid(True)
+        ax.set_title("Espectro")
+        ax.set_xlabel("Absorvância")
+        ax.set_ylabel("Wavelength (nm)")
+        
+        plt.tight_layout()
+        
+        # Exibir o gráfico no Streamlit
+        st.pyplot(fig)
     
-    plt.tight_layout()
+         # Exibir previsões
+        st.subheader("Previsões feitas pelo modelo (xÁgua, xEtanol, xDEC):")
+        st.dataframe(pd.DataFrame(y_pred, columns=['xAgua_pred', 'xEtanol_pred', 'xDEC_pred']))
     
-    # Exibir o gráfico no Streamlit
-    st.pyplot(fig)
-
-     # Exibir previsões
-    st.subheader("Previsões feitas pelo modelo (xÁgua, xEtanol, xDEC):")
-    st.dataframe(pd.DataFrame(y_pred, columns=['xAgua_pred', 'xEtanol_pred', 'xDEC_pred']))
+    
