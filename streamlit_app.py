@@ -70,7 +70,7 @@ def plotar_graf():
 
     # Sidebar: seleção de colunas (amostras) para visualizar
     colunas_disponiveis = df_espectros.columns.tolist()
-    colunas_selecionadas = st.sidebar.multiselect("Selecione as amostras para visualizar", colunas_disponiveis, default=colunas_disponiveis[:5])
+    #colunas_selecionadas = st.sidebar.multiselect("Selecione as amostras para visualizar", colunas_disponiveis, default=colunas_disponiveis[:5])
     
     # Plotar gráfico
     st.subheader("Gráfico de Absorbância por Comprimento de Onda")
