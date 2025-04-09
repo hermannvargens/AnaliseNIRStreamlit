@@ -7,7 +7,7 @@ import matplotlib.pyplot as plt
 # Função para carregar o modelo PLS salvo
 @st.cache_resource
 def load_model():
-    model = joblib.load('modelos/pls.joblib') 
+    model = joblib.load('pls.joblib') 
     #model = joblib.load('knn.pkl')
     #model = joblib.load('rf.pkl')
     #model = joblib.load('pls.pkl') 
