@@ -9,10 +9,10 @@ import matplotlib.pyplot as plt
 def load_model():
     #model = joblib.load('pls.joblib') 
     #model = joblib.load('knn_normalizado.joblib')
-    model = joblib.load('knn_nao_normalizado.joblib')
+    #model = joblib.load('knn_nao_normalizado.joblib')
     #model = joblib.load('rfr.joblib')
     #model = joblib.load('svr_normalizado.joblib')
-    #model = joblib.load('svr_nao_normalizado.joblib')
+    model = joblib.load('svr_nao_normalizado.joblib')
     return model
 
 # Função para processar o arquivo CSV com o mesmo pré-processamento usado no Jupyter
