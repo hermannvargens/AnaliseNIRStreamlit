@@ -46,6 +46,7 @@ if uploaded_file is not None:
     st.write(df)
 
     X = df.values
+    y_pred = model.predict(X)
 
     #obj = joblib.load('knn_normalizado.joblib')
     #model = obj['model']
@@ -53,7 +54,7 @@ if uploaded_file is not None:
     #scaler_y = obj['scaler_y']
     
     #X_input = scaler_X.transform(X)
-    y_pred = model.predict(X_input)
+    #y_pred = model.predict(X_input)
     #y_pred = scaler_y.inverse_transform(y_pred)
 
     # Plotar espectro no Streamlit
