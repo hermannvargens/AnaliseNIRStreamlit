@@ -11,8 +11,8 @@ def load_model():
     #model = joblib.load('knn_normalizado.joblib')
     #model = joblib.load('knn_nao_normalizado.joblib')
     #model = joblib.load('rfr.joblib')
-    #model = joblib.load('svr_normalizado.joblib')
-    model = joblib.load('svr_nao_normalizado.joblib')
+    model = joblib.load('svr_normalizado.joblib')
+    #model = joblib.load('svr_nao_normalizado.joblib')
     return model
 
 # Função para processar o arquivo CSV com o mesmo pré-processamento usado no Jupyter
@@ -46,16 +46,18 @@ if uploaded_file is not None:
     st.write(df)
 
     X = df.values
-    y_pred = model.predict(X)
+    #y_pred = model.predict(X) # se não for normalizado
 
-    #obj = joblib.load('knn_normalizado.joblib')
-    #model = obj['model']
-    #scaler_X = obj['scaler_X']
-    #scaler_y = obj['scaler_y']
+    #########se for normalizado
+    obj = joblib.load('svr_normalizado.joblib')
+    model = obj['model']
+    scaler_X = obj['scaler_X']
+    scaler_y = obj['scaler_y']
     
-    #X_input = scaler_X.transform(X)
-    #y_pred = model.predict(X_input)
-    #y_pred = scaler_y.inverse_transform(y_pred)
+    X_input = scaler_X.transform(X)
+    y_pred = model.predict(X_input)
+    y_pred = scaler_y.inverse_transform(y_pred)
+    #########
 
     # Plotar espectro no Streamlit
     st.subheader("Gráfico do Espectro ")
