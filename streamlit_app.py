@@ -50,7 +50,7 @@ if uploaded_file is not None:
     #y_pred = model.predict(X) # se não for normalizado
 
     #########se for normalizado
-    obj = joblib.load('pls.joblib')
+    obj = joblib.load('pls_normalizado.joblib')
     model = obj['model']
     scaler_X = obj['scaler_X']
     scaler_y = obj['scaler_y']
