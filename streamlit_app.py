@@ -9,7 +9,7 @@ import matplotlib.pyplot as plt
 def load_model():
     #model = joblib.load('pls.joblib') 
     #model = joblib.load('knn.pkl')
-    model = joblib.load('rf.joblib')
+    model = joblib.load('rfr.joblib')
     #model = joblib.load('pls.pkl') 
     #model = joblib.load('knn.pkl')
     #model = joblib.load('rf.pkl')
