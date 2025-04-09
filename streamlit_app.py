@@ -8,8 +8,8 @@ import matplotlib.pyplot as plt
 @st.cache_resource
 def load_model():
     #model = joblib.load('pls.joblib') 
-    #model = joblib.load('knn.pkl')
-    model = joblib.load('rfr.joblib')
+    model = joblib.load('knn_normalizado.pkl')
+    #model = joblib.load('rfr.joblib')
     #model = joblib.load('pls.pkl') 
     #model = joblib.load('knn.pkl')
     #model = joblib.load('rf.pkl')
