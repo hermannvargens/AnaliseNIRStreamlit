@@ -84,6 +84,9 @@ def plotar_graf():
 #função para plotar RMSE
 # Título do app
 def plotar_rmse():
+
+    df_resultados = pd.read_csv('resultados.csv')
+    
     st.title("Comparação de RMSE - Modelos e Normalizações")
     
     # Supondo que results_df já esteja carregado no seu script
