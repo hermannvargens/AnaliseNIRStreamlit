@@ -83,7 +83,7 @@ def plotar_graf():
 
 # Sidebar como menu
 st.sidebar.title("Menu")
-page = st.sidebar.selectbox("Escolha a página:", ["Início", "Preparação dos Dados", "Novas Predições"])
+page = st.sidebar.selectbox("Escolha a página:", ["Início", "Preparação dos Dados", "Modelagem", "Novas Predições"])
 
 # Conteúdo principal muda conforme o menu
 if page == "Início":
@@ -99,7 +99,15 @@ if page == "Início":
 elif page == "Preparação dos Dados":
     st.title("Preparação dos Dados")
     st.write("Os dados já estavam pré-processados usando Savitzky-Golay com 7 pontos. O conjunto de dados foi então dividido em dados de treino (80%) e teste (20%).")
-        
+
+elif page == "Modelagem":
+    st.title("Modelagem")
+    st.write("A Modelagem foi realizada com os algoritmos PLS, KNN, Random Forest e SVR.")
+    st.write("Além disso, com exceção do Random Forest, os demais algoritmos foram treinados com e sem Normalização (média em 0 e desvio-padrão 1), para comparação de resultados.)
+    st.write("Para o treino dos dados, foi utilizada validação cruzada, com 5 folds.")
+    sub.header("Avaliação")
+    st.write("Foram utilizadas as métricas RMSE e R², avaliadas no conjunto de treino e teste.")
+     
 # Você pode adicionar sliders, selects, gráficos, etc.
 elif page == "Novas Predições":
     st.title("Novas Predições")
