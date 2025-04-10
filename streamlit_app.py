@@ -112,7 +112,8 @@ elif page == "Modelagem":
 elif page == "Resultados":
     st.title("Resultados")
     st.subheader("Métricas")
-             
+    df_resultados = pd.read_csv('resultados.csv')
+    
 # Você pode adicionar sliders, selects, gráficos, etc.
 elif page == "Novas Predições":
     st.title("Novas Predições")
