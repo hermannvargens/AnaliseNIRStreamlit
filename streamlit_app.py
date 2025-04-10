@@ -103,7 +103,7 @@ elif page == "Preparação dos Dados":
 elif page == "Modelagem":
     st.title("Modelagem")
     st.write("A Modelagem foi realizada com os algoritmos PLS, KNN, Random Forest e SVR.")
-    st.write("Além disso, com exceção do Random Forest, os demais algoritmos foram treinados com e sem Normalização (média em 0 e desvio-padrão 1), para comparação de resultados.)
+    st.write("Além disso, com exceção do Random Forest, os demais algoritmos foram treinados com e sem Normalização (média em 0 e desvio-padrão 1), para comparação de resultados.")
     st.write("Para o treino dos dados, foi utilizada validação cruzada, com 5 folds.")
     sub.header("Avaliação")
     st.write("Foram utilizadas as métricas RMSE e R², avaliadas no conjunto de treino e teste.")
