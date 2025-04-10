@@ -81,6 +81,35 @@ def plotar_graf():
     # ax.legend()  # Descomente se quiser legenda
     st.pyplot(fig)
 
+#função para plotar RMSE
+# Título do app
+def plotar_rmse():
+    st.title("Comparação de RMSE - Modelos e Normalizações")
+    
+    # Supondo que results_df já esteja carregado no seu script
+    # results_df = pd.read_csv("caminho_para_resultados.csv")  # Se for necessário carregar
+    
+    # Combinar as colunas 'Modelo' e 'Normalização'
+    results_df['Modelo_Normalização'] = results_df['Modelo'] + ' (' + results_df['Normalização'] + ')'
+    
+    # Plot
+    st.subheader("Gráfico de Comparação de RMSE (Treino vs Teste)")
+    
+    fig, ax = plt.subplots(figsize=(6, 4))
+    X_axis = np.arange(len(results_df))
+    
+    ax.bar(X_axis - 0.2, results_df['RMSE (Treino)'], 0.4, label='RMSE (Treino)')
+    ax.bar(X_axis + 0.2, results_df['RMSE (Predito)'], 0.4, label='RMSE (Teste)')
+    
+    ax.set_xticks(X_axis)
+    ax.set_xticklabels(results_df['Modelo_Normalização'], rotation=45, ha='right')
+    ax.set_ylabel('RMSE')
+    ax.set_title('Comparação de RMSE (Treino) e RMSE (Teste)')
+    ax.legend()
+    fig.tight_layout()
+    
+    st.pyplot(fig)
+
 # Sidebar como menu
 st.sidebar.title("Menu")
 page = st.sidebar.selectbox("Escolha a página:", ["Início", "Preparação dos Dados", "Modelagem", "Resultados", "Novas Predições"])
@@ -114,6 +143,8 @@ elif page == "Resultados":
     st.subheader("Métricas")
     df_resultados = pd.read_csv('resultados.csv')
     df_resultados
+
+    plotar_rmse()
 
 
     
