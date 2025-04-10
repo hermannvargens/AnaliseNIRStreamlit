@@ -86,6 +86,8 @@ def plotar_graf():
 def plotar_rmse():
 
     results_df = pd.read_csv('resultados.csv')
+    # Ordenar pelo RMSE (Predito)
+    results_df = results_df.sort_values(by='RMSE (Predito)', ascending=True).reset_index(drop=True)
     
     #st.title("Comparação de RMSE - Modelos e Normalizações")
     
