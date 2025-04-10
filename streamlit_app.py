@@ -83,7 +83,7 @@ def plotar_graf():
 
 # Sidebar como menu
 st.sidebar.title("Menu")
-page = st.sidebar.selectbox("Escolha a página:", ["Início", "Modelo", "Novas Predições"])
+page = st.sidebar.selectbox("Escolha a página:", ["Início", "Preparação dos Dados", "Novas Predições"])
 
 # Conteúdo principal muda conforme o menu
 if page == "Início":
@@ -96,10 +96,11 @@ if page == "Início":
     plotar_graf()
     
 
-elif page == "Modelo":
-    st.title("Modelo de Regressão")
-    st.write("Aqui você pode treinar ou testar seu modelo.")
-    # Você pode adicionar sliders, selects, gráficos, etc.
+elif page == "Preparação dos Dados":
+    st.title("Preparação dos Dados")
+    st.write("Os dados já estavam pré-processados usando Savitzky-Golay com 7 pontos. O conjunto de dados foi então dividido em dados de treino (80%) e teste (20%).")
+        
+# Você pode adicionar sliders, selects, gráficos, etc.
 elif page == "Novas Predições":
     st.title("Novas Predições")
     st.write("Aplicação de regressão usando Streamlit.")
