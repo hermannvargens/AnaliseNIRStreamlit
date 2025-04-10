@@ -87,10 +87,7 @@ def plotar_rmse():
 
     results_df = pd.read_csv('resultados.csv')
     
-    st.title("Comparação de RMSE - Modelos e Normalizações")
-    
-    # Supondo que results_df já esteja carregado no seu script
-    # results_df = pd.read_csv("caminho_para_resultados.csv")  # Se for necessário carregar
+    #st.title("Comparação de RMSE - Modelos e Normalizações")
     
     # Combinar as colunas 'Modelo' e 'Normalização'
     results_df['Modelo_Normalização'] = results_df['Modelo'] + ' (' + results_df['Normalização'] + ')'
@@ -107,7 +104,7 @@ def plotar_rmse():
     ax.set_xticks(X_axis)
     ax.set_xticklabels(results_df['Modelo_Normalização'], rotation=45, ha='right')
     ax.set_ylabel('RMSE')
-    ax.set_title('Comparação de RMSE (Treino) e RMSE (Teste)')
+    #ax.set_title('Comparação de RMSE (Treino) e RMSE (Teste)')
     ax.legend()
     fig.tight_layout()
     
