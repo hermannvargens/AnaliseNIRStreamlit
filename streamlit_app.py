@@ -112,6 +112,43 @@ def plotar_rmse():
     
     st.pyplot(fig)
 
+#Plotar scatterplot Real x Predito
+def plotar_realpredito():
+    # Título do app
+    #st.title("Comparação Real vs. Predito - SVR")
+ 
+    # Gráficos
+    #st.subheader("Dispersão entre Valores Reais e Preditos")
+    
+    fig, axs = plt.subplots(1, 3, figsize=(15, 5))
+    
+    # xAgua
+    axs[0].scatter(y_test[:, 0], y_pred[:, 0])
+    axs[0].plot([min(y_test[:, 0]), max(y_test[:, 0])],
+                [min(y_test[:, 0]), max(y_test[:, 0])], 'k--', lw=2)
+    axs[0].set_xlabel('Real xAgua')
+    axs[0].set_ylabel('Predito xAgua')
+    axs[0].set_title('SVR - xAgua')
+    
+    # xEtanol
+    axs[1].scatter(y_test[:, 1], y_pred[:, 1])
+    axs[1].plot([min(y_test[:, 1]), max(y_test[:, 1])],
+                [min(y_test[:, 1]), max(y_test[:, 1])], 'k--', lw=2)
+    axs[1].set_xlabel('Real xEtanol')
+    axs[1].set_ylabel('Predito xEtanol')
+    axs[1].set_title('SVR - xEtanol')
+    
+    # xDEC
+    axs[2].scatter(y_test[:, 2], y_pred[:, 2])
+    axs[2].plot([min(y_test[:, 2]), max(y_test[:, 2])],
+                [min(y_test[:, 2]), max(y_test[:, 2])], 'k--', lw=2)
+    axs[2].set_xlabel('Real xDEC')
+    axs[2].set_ylabel('Predito xDEC')
+    axs[2].set_title('SVR - xDEC')
+    
+    fig.tight_layout()
+    st.pyplot(fig)
+
 # Sidebar como menu
 st.sidebar.title("Menu")
 page = st.sidebar.selectbox("Escolha a página:", ["Início", "Preparação dos Dados", "Modelagem", "Resultados", "Novas Predições"])
