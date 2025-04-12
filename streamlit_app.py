@@ -163,8 +163,7 @@ def plot_residuos():
         # Título do app
     st.title("Análise de Resíduos - SVR")
     
-    # Exemplo fictício (remova se você já tem o DataFrame real)
-    # df_svr_nao_normalizado = pd.read_csv('df_pred_real_svr.csv')
+    df_svr_nao_normalizado = pd.read_csv('df_pred_real_svr.csv')
     
     # Calcular resíduos
     residuals_agua = df_svr_nao_normalizado['xAgua_test'] - df_svr_nao_normalizado['xAgua_pred']
