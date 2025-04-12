@@ -120,7 +120,7 @@ def plotar_realpredito():
     df_svr_nao_normalizado = pd.read_csv('df_pred_real_svr.csv')
     
     # Criar a figura com subplots
-    fig, axs = plt.subplots(3, 1, figsize=(15, 5))
+    fig, axs = plt.subplots(3, 1, figsize=(15, 10))
     
     # Gráfico 1 - xAgua
     axs[0].scatter(df_svr_nao_normalizado['xAgua_test'], df_svr_nao_normalizado['xAgua_pred'])
