@@ -159,6 +159,54 @@ def plotar_realpredito():
     plt.tight_layout()
     st.pyplot(fig)
 
+dev plot_residuos():
+        # Título do app
+    st.title("Análise de Resíduos - SVR")
+    
+    # Exemplo fictício (remova se você já tem o DataFrame real)
+    # df_svr_nao_normalizado = pd.read_csv('df_pred_real_svr.csv')
+    
+    # Calcular resíduos
+    residuals_agua = df_svr_nao_normalizado['xAgua_test'] - df_svr_nao_normalizado['xAgua_pred']
+    residuals_etanol = df_svr_nao_normalizado['xEtanol_test'] - df_svr_nao_normalizado['xEtanol_pred']
+    residuals_dec = df_svr_nao_normalizado['xDEC_test'] - df_svr_nao_normalizado['xDEC_pred']
+    
+    # Criar figura com subplots
+    fig, axs = plt.subplots(1, 3, figsize=(15, 5))
+    
+    # Função auxiliar para definir limites simétricos do grafico
+    def set_symmetric_ylim(ax, residuals):
+        limit = max(abs(residuals.min()), abs(residuals.max()))
+        ax.set_ylim(-limit, limit)
+    
+    # Gráfico 1 - Resíduos xÁgua
+    axs[0].scatter(df_svr_nao_normalizado['xAgua_test'], residuals_agua)
+    axs[0].axhline(0, color='red', linestyle='--')
+    axs[0].set_xlabel("Valor Real (Água)")
+    axs[0].set_ylabel("Resíduo")
+    axs[0].set_title("Resíduos - Água")
+    set_symmetric_ylim(axs[0], residuals_agua)
+    
+    # Gráfico 2 - Resíduos xEtanol
+    axs[1].scatter(df_svr_nao_normalizado['xEtanol_test'], residuals_etanol)
+    axs[1].axhline(0, color='red', linestyle='--')
+    axs[1].set_xlabel("Valor Real (Etanol)")
+    axs[1].set_ylabel("Resíduo")
+    axs[1].set_title("Resíduos - Etanol")
+    set_symmetric_ylim(axs[1], residuals_etanol)
+    
+    # Gráfico 3 - Resíduos xDEC
+    axs[2].scatter(df_svr_nao_normalizado['xDEC_test'], residuals_dec)
+    axs[2].axhline(0, color='red', linestyle='--')
+    axs[2].set_xlabel("Valor Real (DEC)")
+    axs[2].set_ylabel("Resíduo")
+    axs[2].set_title("Resíduos - DEC")
+    set_symmetric_ylim(axs[2], residuals_dec)
+    
+    plt.tight_layout()
+    st.pyplot(fig)
+
+
 # Sidebar como menu
 st.sidebar.title("Menu")
 page = st.sidebar.selectbox("Escolha a página:", ["Início", "Preparação dos Dados", "Modelagem", "Resultados", "Novas Predições"])
@@ -196,6 +244,8 @@ elif page == "Resultados":
     plotar_rmse()
 
     plotar_realpredito()
+
+    plot_residuos()
 
 
     
