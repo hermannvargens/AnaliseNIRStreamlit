@@ -115,7 +115,7 @@ def plotar_rmse():
 #Plotar scatterplot Real x Predito
 def plotar_realpredito():
     # Título do app
-    st.title("Real x Predito")
+    st.subheader("Real x Predito")
     
     df_svr_nao_normalizado = pd.read_csv('df_pred_real_svr.csv')
     
