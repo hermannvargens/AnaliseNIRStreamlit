@@ -117,7 +117,7 @@ def plotar_realpredito():
     # Título do app
     st.title("Real x Predito")
     
-    #df_svr_nao_normalizado = pd.read_csv('df_pred_real_svr.csv')
+    df_svr_nao_normalizado = pd.read_csv('df_pred_real_svr.csv')
     
     # Criar a figura com subplots
     fig, axs = plt.subplots(1, 3, figsize=(15, 5))
