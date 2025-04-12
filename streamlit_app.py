@@ -120,8 +120,7 @@ def plotar_realpredito():
     df_svr_nao_normalizado = pd.read_csv('df_pred_real_svr.csv')
     
     # Criar a figura com subplots
-    #fig, axs = plt.subplots(1, 3, figsize=(15, 5))
-    plt.figure(figsize=(6, 4))
+    #fig, axs = plt.subplots(3, 1, figsize=(15, 5))
     
     # Gráfico 1 - xAgua
     axs[0].scatter(df_svr_nao_normalizado['xAgua_test'], df_svr_nao_normalizado['xAgua_pred'])
@@ -135,7 +134,7 @@ def plotar_realpredito():
     axs[0].set_title('xAgua')
     
     # Gráfico 2 - xEtanol
-    plt.figure(figsize=(6, 4))
+    
     axs[1].scatter(df_svr_nao_normalizado['xEtanol_test'], df_svr_nao_normalizado['xEtanol_pred'])
     axs[1].plot(
         [df_svr_nao_normalizado['xEtanol_test'].min(), df_svr_nao_normalizado['xEtanol_test'].max()],
@@ -147,7 +146,7 @@ def plotar_realpredito():
     axs[1].set_title('xEtanol')
     
     # Gráfico 3 - xDEC
-    plt.figure(figsize=(6, 4))
+    
     axs[2].scatter(df_svr_nao_normalizado['xDEC_test'], df_svr_nao_normalizado['xDEC_pred'])
     axs[2].plot(
         [df_svr_nao_normalizado['xDEC_test'].min(), df_svr_nao_normalizado['xDEC_test'].max()],
