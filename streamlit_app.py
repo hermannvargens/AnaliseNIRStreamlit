@@ -159,7 +159,7 @@ def plotar_realpredito():
     plt.tight_layout()
     st.pyplot(fig)
 
-dev plot_residuos():
+def plot_residuos():
         # Título do app
     st.title("Análise de Resíduos - SVR")
     
