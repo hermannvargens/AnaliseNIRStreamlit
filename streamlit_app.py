@@ -115,38 +115,48 @@ def plotar_rmse():
 #Plotar scatterplot Real x Predito
 def plotar_realpredito():
     # Título do app
-    #st.title("Comparação Real vs. Predito - SVR")
- 
-    # Gráficos
-    #st.subheader("Dispersão entre Valores Reais e Preditos")
+    st.title("Real x Predito")
     
+    #df_svr_nao_normalizado = pd.read_csv('df_pred_real_svr.csv')
+    
+    # Criar a figura com subplots
     fig, axs = plt.subplots(1, 3, figsize=(15, 5))
     
-    # xAgua
-    axs[0].scatter(y_test[:, 0], y_pred[:, 0])
-    axs[0].plot([min(y_test[:, 0]), max(y_test[:, 0])],
-                [min(y_test[:, 0]), max(y_test[:, 0])], 'k--', lw=2)
-    axs[0].set_xlabel('Real xAgua')
-    axs[0].set_ylabel('Predito xAgua')
-    axs[0].set_title('SVR - xAgua')
+    # Gráfico 1 - xAgua
+    axs[0].scatter(df_svr_nao_normalizado['xAgua_test'], df_svr_nao_normalizado['xAgua_pred'])
+    axs[0].plot(
+        [df_svr_nao_normalizado['xAgua_test'].min(), df_svr_nao_normalizado['xAgua_test'].max()],
+        [df_svr_nao_normalizado['xAgua_test'].min(), df_svr_nao_normalizado['xAgua_test'].max()],
+        'k--', lw=2
+    )
+    axs[0].set_xlabel('xAgua (Test)')
+    axs[0].set_ylabel('xAgua (Pred)')
+    axs[0].set_title('xAgua')
     
-    # xEtanol
-    axs[1].scatter(y_test[:, 1], y_pred[:, 1])
-    axs[1].plot([min(y_test[:, 1]), max(y_test[:, 1])],
-                [min(y_test[:, 1]), max(y_test[:, 1])], 'k--', lw=2)
-    axs[1].set_xlabel('Real xEtanol')
-    axs[1].set_ylabel('Predito xEtanol')
-    axs[1].set_title('SVR - xEtanol')
+    # Gráfico 2 - xEtanol
+    axs[1].scatter(df_svr_nao_normalizado['xEtanol_test'], df_svr_nao_normalizado['xEtanol_pred'])
+    axs[1].plot(
+        [df_svr_nao_normalizado['xEtanol_test'].min(), df_svr_nao_normalizado['xEtanol_test'].max()],
+        [df_svr_nao_normalizado['xEtanol_test'].min(), df_svr_nao_normalizado['xEtanol_test'].max()],
+        'k--', lw=2
+    )
+    axs[1].set_xlabel('xEtanol (Test)')
+    axs[1].set_ylabel('xEtanol (Pred)')
+    axs[1].set_title('xEtanol')
     
-    # xDEC
-    axs[2].scatter(y_test[:, 2], y_pred[:, 2])
-    axs[2].plot([min(y_test[:, 2]), max(y_test[:, 2])],
-                [min(y_test[:, 2]), max(y_test[:, 2])], 'k--', lw=2)
-    axs[2].set_xlabel('Real xDEC')
-    axs[2].set_ylabel('Predito xDEC')
-    axs[2].set_title('SVR - xDEC')
+    # Gráfico 3 - xDEC
+    axs[2].scatter(df_svr_nao_normalizado['xDEC_test'], df_svr_nao_normalizado['xDEC_pred'])
+    axs[2].plot(
+        [df_svr_nao_normalizado['xDEC_test'].min(), df_svr_nao_normalizado['xDEC_test'].max()],
+        [df_svr_nao_normalizado['xDEC_test'].min(), df_svr_nao_normalizado['xDEC_test'].max()],
+        'k--', lw=2
+    )
+    axs[2].set_xlabel('xDEC (Test)')
+    axs[2].set_ylabel('xDEC (Pred)')
+    axs[2].set_title('xDEC')
     
-    fig.tight_layout()
+    # Ajustar layout e exibir no Streamlit
+    plt.tight_layout()
     st.pyplot(fig)
 
 # Sidebar como menu
@@ -184,6 +194,8 @@ elif page == "Resultados":
     results_df
 
     plotar_rmse()
+
+    plotar_realpredito()
 
 
     
