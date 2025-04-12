@@ -173,7 +173,7 @@ def plot_residuos():
     residuals_dec = df_svr_nao_normalizado['xDEC_test'] - df_svr_nao_normalizado['xDEC_pred']
     
     # Criar figura com subplots
-    fig, axs = plt.subplots(1, 3, figsize=(15, 5))
+    fig, axs = plt.subplots(3,1, figsize=(15, 30))
     
     # Função auxiliar para definir limites simétricos do grafico
     def set_symmetric_ylim(ax, residuals):
