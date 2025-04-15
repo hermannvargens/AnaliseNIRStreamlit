@@ -245,7 +245,7 @@ elif page == "Resultados":
 
     
     linhas=[0,1,2,3,4,5]
-    plotar_rmse()
+    plotar_rmse(linhas)
 
     plotar_realpredito()
 
