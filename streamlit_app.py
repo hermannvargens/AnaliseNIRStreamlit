@@ -350,35 +350,35 @@ elif page == "Novas Predições":
         plotar_espectro_carregado(df)
 
 
-    def prever_svr():
-        X = df.values
-        y_pred = svr.predict(X)
-        return pd.DataFrame(y_pred, columns=['xAgua_pred', 'xEtanol_pred', 'xDEC_pred'])
-
-    def prever_pls():
-        X = df.values
-
-#########normalizado
-        obj = joblib.load('pls_normalizado.joblib')
-        model = obj['model']
-        scaler_X = obj['scaler_X']
-        scaler_y = obj['scaler_y']
-        
-        X_input = scaler_X.transform(X)
-        y_pred = model.predict(X_input)
-        y_pred = scaler_y.inverse_transform(y_pred)
-        #########
-
-        return pd.DataFrame(y_pred, columns=['xAgua_pred', 'xEtanol_pred', 'xDEC_pred'])
+        def prever_svr():
+            X = df.values
+            y_pred = svr.predict(X)
+            return pd.DataFrame(y_pred, columns=['xAgua_pred', 'xEtanol_pred', 'xDEC_pred'])
     
-        st.write("Previsões com SVR")
+        def prever_pls():
+            X = df.values
+    
+    #########normalizado
+            obj = joblib.load('pls_normalizado.joblib')
+            model = obj['model']
+            scaler_X = obj['scaler_X']
+            scaler_y = obj['scaler_y']
             
-        resultado_svr = prever_svr()
-        resultado_svr
+            X_input = scaler_X.transform(X)
+            y_pred = model.predict(X_input)
+            y_pred = scaler_y.inverse_transform(y_pred)
+            #########
     
-        st.write("Previsões com PLS")
-        resultado_pls = prever_pls()
-        resultado_pls
+            return pd.DataFrame(y_pred, columns=['xAgua_pred', 'xEtanol_pred', 'xDEC_pred'])
+        
+            st.write("Previsões com SVR")
+                
+            resultado_svr = prever_svr()
+            resultado_svr
+        
+            st.write("Previsões com PLS")
+            resultado_pls = prever_pls()
+            resultado_pls
 
            
          #########
