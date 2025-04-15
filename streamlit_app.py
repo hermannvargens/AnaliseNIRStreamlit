@@ -353,7 +353,7 @@ elif page == "Novas Predições":
         def prever_svr():
             X = df.values
             y_pred = svr.predict(X)
-            return pd.DataFrame(y_pred, columns=['xAgua_pred', 'xEtanol_pred', 'xDEC_pred'])
+            return pd.DataFrame(y_pred, columns=['xAgua', 'xEtanol', 'xDEC'])
     
         def prever_pls():
             X = df.values
@@ -369,7 +369,7 @@ elif page == "Novas Predições":
             y_pred = scaler_y.inverse_transform(y_pred)
             #########
     
-            return pd.DataFrame(y_pred, columns=['xAgua_pred', 'xEtanol_pred', 'xDEC_pred'])
+            return pd.DataFrame(y_pred, columns=['xAgua', 'xEtanol', 'xDEC'])
         
         st.write("Previsões com SVR")
             
