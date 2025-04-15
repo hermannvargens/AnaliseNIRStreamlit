@@ -217,7 +217,7 @@ def plot_residuos():
 # Sidebar como menu#
 #######################################################
 st.sidebar.title("Menu")
-page = st.sidebar.selectbox("Escolha a página:", ["Início", "Preparação dos Dados", "Métodos", "Resultados", "Stacking", "Novas Predições"])
+page = st.sidebar.selectbox("Escolha a página:", ["Início", "Preparação dos Dados", "Métodos", "Resultados Iniciais", "Stacking", "Novas Predições"])
 
 # Conteúdo principal muda conforme o menu
 if page == "Início":
@@ -243,7 +243,7 @@ elif page == "Métodos":
     st.title("Avaliação")
     st.write("Foram utilizadas as métricas RMSE e R², avaliadas no conjunto de treino e teste.")
 
-elif page == "Resultados":
+elif page == "Resultados Iniciais":
     st.title("Resultados")
     st.subheader("Métricas")
     results_df = pd.read_csv('resultados.csv')
