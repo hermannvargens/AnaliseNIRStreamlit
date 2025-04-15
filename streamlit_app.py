@@ -324,9 +324,9 @@ elif page == "Novas Predições":
            
          #########
         
-    prever_svr()
-
-    prever_pls()
+    resultado_svr = prever_svr()
+    resultado_svr
+    
         
             
             
