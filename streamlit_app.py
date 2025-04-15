@@ -242,7 +242,7 @@ elif page == "Resultados":
     st.title("Resultados")
     st.subheader("Métricas")
     results_df = pd.read_csv('resultados.csv')
-    st.dataframe(results_df.head(3))
+    st.table(results_df.head(6))
 
     #Plotar RMSE de todos os modelos
     results_df = pd.read_csv('resultados.csv')
