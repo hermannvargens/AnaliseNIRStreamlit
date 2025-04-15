@@ -167,19 +167,15 @@ def plotar_realpredito(df):
     plt.tight_layout()
     st.pyplot(fig)
 
-def plot_residuos():
-        # Título do app
-    st.subheader("Análise de Resíduos - SVR")
-    
-    df_svr_nao_normalizado = pd.read_csv('df_pred_real_svr.csv')
+def plot_residuos(df):
     
     # Calcular resíduos
-    residuals_agua = df_svr_nao_normalizado['xAgua_test'] - df_svr_nao_normalizado['xAgua_pred']
-    residuals_etanol = df_svr_nao_normalizado['xEtanol_test'] - df_svr_nao_normalizado['xEtanol_pred']
-    residuals_dec = df_svr_nao_normalizado['xDEC_test'] - df_svr_nao_normalizado['xDEC_pred']
+    residuals_agua = df['xAgua_test'] - df['xAgua_pred']
+    residuals_etanol = df['xEtanol_test'] - df['xEtanol_pred']
+    residuals_dec = df['xDEC_test'] - df['xDEC_pred']
     
     # Criar figura com subplots
-    fig, axs = plt.subplots(3,1, figsize=(15, 30))
+    fig, axs = plt.subplots(1,3, figsize=(30,15))
     
     # Função auxiliar para definir limites simétricos do grafico
     def set_symmetric_ylim(ax, residuals):
@@ -187,7 +183,7 @@ def plot_residuos():
         ax.set_ylim(-limit, limit)
     
     # Gráfico 1 - Resíduos xÁgua
-    axs[0].scatter(df_svr_nao_normalizado['xAgua_test'], residuals_agua)
+    axs[0].scatter(df['xAgua_test'], residuals_agua)
     axs[0].axhline(0, color='red', linestyle='--')
     axs[0].set_xlabel("Valor Real (Água)")
     axs[0].set_ylabel("Resíduo")
@@ -195,7 +191,7 @@ def plot_residuos():
     set_symmetric_ylim(axs[0], residuals_agua)
     
     # Gráfico 2 - Resíduos xEtanol
-    axs[1].scatter(df_svr_nao_normalizado['xEtanol_test'], residuals_etanol)
+    axs[1].scatter(df['xEtanol_test'], residuals_etanol)
     axs[1].axhline(0, color='red', linestyle='--')
     axs[1].set_xlabel("Valor Real (Etanol)")
     axs[1].set_ylabel("Resíduo")
@@ -203,7 +199,7 @@ def plot_residuos():
     set_symmetric_ylim(axs[1], residuals_etanol)
     
     # Gráfico 3 - Resíduos xDEC
-    axs[2].scatter(df_svr_nao_normalizado['xDEC_test'], residuals_dec)
+    axs[2].scatter(df['xDEC_test'], residuals_dec)
     axs[2].axhline(0, color='red', linestyle='--')
     axs[2].set_xlabel("Valor Real (DEC)")
     axs[2].set_ylabel("Resíduo")
@@ -264,9 +260,7 @@ elif page == "Resultados Iniciais":
     st.write("Vemos que os modelos SVR e PLS não normalizados possuem os menores valores de RMSE.")
 
 
-    plot_residuos()
-
-elif page == "Stacking":
+  elif page == "Stacking":
     st.title("Stacking Regressor")
     st.write("Uma vez escolhidos os modelos com melhores resultados, tentamos realizar um ensemble, do tipo Stacking, que consiste em realizar um novo ajuste unindo os modelos PLS e SVR em um modelo só, ajustados através de uma Regressão Linear, com a expectativa de que tal modelo possa apresentar resultados ainda melhores.")
 
@@ -286,7 +280,16 @@ elif page == "Stacking":
     st.subheader("Stacking: Real x Predito")
 
     df_stacking = pd.read_csv('df_pred_real_stacking.csv')
-    plotar_realpredito(df_stacking) 
+    plotar_realpredito(df_stacking)
+
+    st.subheader("Análise de Resíduos - SVR")
+    plot_residuos(df_svr)
+
+    st.subheader("Análise de Resíduos - PLS")
+    plot_residuos(df_pls)
+
+    st.subheader("Análise de Resíduos - Stacking")
+    plot_residuos(df_stacking)
 
 
     
