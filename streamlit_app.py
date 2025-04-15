@@ -122,7 +122,7 @@ def plotar_realpredito(df):
     fig, axs = plt.subplots(3, 1, figsize=(15, 30))
     
     # Gráfico 1 - xAgua
-    axs[0].scatter(df_svr_nao_normalizado['xAgua_test'], df_svr_nao_normalizado['xAgua_pred'])
+    axs[0].scatter(df['xAgua_test'], df['xAgua_pred'])
     axs[0].plot(
         [df['xAgua_test'].min(), df['xAgua_test'].max()],
         [df['xAgua_test'].min(), df['xAgua_test'].max()],
@@ -256,7 +256,6 @@ elif page == "Resultados":
 
     st.write("Vemos que os modelos SVR e PLS não normalizados possuem os menores valores de RMSE.")
 
-    plotar_realpredito()
 
     plot_residuos()
 
