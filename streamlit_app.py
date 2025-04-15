@@ -194,6 +194,7 @@ def plot_residuos(df):
     axs[0].set_xlabel("Valor Real (Água)", fontsize=label_fontsize)
     axs[0].set_ylabel("Resíduo", fontsize=label_fontsize)
     axs[0].set_title("Resíduos - Água", fontsize=title_fontsize)
+    axs[0].tick_params(axis='both', labelsize=tick_fontsize)
     set_symmetric_ylim(axs[0], residuals_agua)
     
     # Gráfico 2 - Resíduos xEtanol
@@ -202,6 +203,7 @@ def plot_residuos(df):
     axs[1].set_xlabel("Valor Real (Etanol)", fontsize=label_fontsize)
     axs[1].set_ylabel("Resíduo", fontsize=label_fontsize)
     axs[1].set_title("Resíduos - Etanol", fontsize=title_fontsize)
+    axs[1].tick_params(axis='both', labelsize=tick_fontsize)
     set_symmetric_ylim(axs[1], residuals_etanol)
     
     # Gráfico 3 - Resíduos xDEC
@@ -210,6 +212,7 @@ def plot_residuos(df):
     axs[2].set_xlabel("Valor Real (DEC)", fontsize=label_fontsize)
     axs[2].set_ylabel("Resíduo", fontsize=label_fontsize)
     axs[2].set_title("Resíduos - DEC", fontsize=title_fontsize)
+    axs[2].tick_params(axis='both', labelsize=tick_fontsize)
     set_symmetric_ylim(axs[2], residuals_dec)
     
     plt.tight_layout()
