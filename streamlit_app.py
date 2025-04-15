@@ -273,6 +273,10 @@ elif page == "Stacking":
     st.title("Stacking Regressor")
     st.write("Uma vez escolhidos os modelos com melhores resultados, tentamos realizar um ensemble, do tipo Stacking, que consiste em realizar um novo ajuste unindo os modelos PLS e SVR em um modelo só, ajustados através de uma Regressão Linear, com a expectativa de que tal modelo possa apresentar resultados ainda melhores.")
 
+    results_df = pd.read_csv('resultados.csv')
+    linhas=[0,4,6]
+    plotar_rmse(linhas,results_df)
+
     # Título do app
     st.subheader("SVR: Real x Predito")
     
