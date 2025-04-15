@@ -123,7 +123,7 @@ def plotar_realpredito(df):
     title_fontsize = 40
     label_fontsize = 36
     tick_fontsize = 32
-    point_size = 100  # Tamanho dos pontos do scatter
+    point_size = 200  # Tamanho dos pontos do scatter
     
     # Gráfico 1 - xAgua
     axs[0].scatter(df['xAgua_test'], df['xAgua_pred'], s=point_size)
