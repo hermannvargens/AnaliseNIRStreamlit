@@ -168,6 +168,12 @@ def plotar_realpredito(df):
     st.pyplot(fig)
 
 def plot_residuos(df):
+
+    # Tamanhos de fonte personalizados
+    title_fontsize = 40
+    label_fontsize = 36
+    tick_fontsize = 32
+    point_size = 200  # Tamanho dos pontos do scatter
     
     # Calcular resíduos
     residuals_agua = df['xAgua_test'] - df['xAgua_pred']
@@ -183,27 +189,27 @@ def plot_residuos(df):
         ax.set_ylim(-limit, limit)
     
     # Gráfico 1 - Resíduos xÁgua
-    axs[0].scatter(df['xAgua_test'], residuals_agua)
+    axs[0].scatter(df['xAgua_test'], residuals_agua, s=point_size)
     axs[0].axhline(0, color='red', linestyle='--')
-    axs[0].set_xlabel("Valor Real (Água)")
-    axs[0].set_ylabel("Resíduo")
-    axs[0].set_title("Resíduos - Água")
+    axs[0].set_xlabel("Valor Real (Água)", fontsize=label_fontsize)
+    axs[0].set_ylabel("Resíduo", fontsize=label_fontsize)
+    axs[0].set_title("Resíduos - Água", fontsize=title_fontsize)
     set_symmetric_ylim(axs[0], residuals_agua)
     
     # Gráfico 2 - Resíduos xEtanol
-    axs[1].scatter(df['xEtanol_test'], residuals_etanol)
+    axs[1].scatter(df['xEtanol_test'], residuals_etanol, s=point_size)
     axs[1].axhline(0, color='red', linestyle='--')
-    axs[1].set_xlabel("Valor Real (Etanol)")
-    axs[1].set_ylabel("Resíduo")
-    axs[1].set_title("Resíduos - Etanol")
+    axs[1].set_xlabel("Valor Real (Etanol)", fontsize=label_fontsize)
+    axs[1].set_ylabel("Resíduo", fontsize=label_fontsize)
+    axs[1].set_title("Resíduos - Etanol", fontsize=title_fontsize)
     set_symmetric_ylim(axs[1], residuals_etanol)
     
     # Gráfico 3 - Resíduos xDEC
-    axs[2].scatter(df['xDEC_test'], residuals_dec)
+    axs[2].scatter(df['xDEC_test'], residuals_dec, s=point_size)
     axs[2].axhline(0, color='red', linestyle='--')
-    axs[2].set_xlabel("Valor Real (DEC)")
-    axs[2].set_ylabel("Resíduo")
-    axs[2].set_title("Resíduos - DEC")
+    axs[2].set_xlabel("Valor Real (DEC)", fontsize=label_fontsize)
+    axs[2].set_ylabel("Resíduo", fontsize=label_fontsize)
+    axs[2].set_title("Resíduos - DEC", fontsize=title_fontsize)
     set_symmetric_ylim(axs[2], residuals_dec)
     
     plt.tight_layout()
