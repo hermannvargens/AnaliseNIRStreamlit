@@ -301,7 +301,7 @@ elif page == "Stacking":
 elif page == "Novas Predições":
 
     svr = joblib.load('svr_nao_normalizado.joblib')
-    pls = joblib.load('pls_nao_normalizado.joblib')
+    pls = joblib.load('pls_normalizado.joblib')
 
     # Título do app
     st.title("Predição com Modelo Stacking")
@@ -322,8 +322,20 @@ elif page == "Novas Predições":
 
     def prever_pls():
         X = df.values
-        y_pred = pls.predict(X)
+
+#########normalizado
+        obj = joblib.load('pls_normalizado.joblib')
+        model = obj['model']
+        scaler_X = obj['scaler_X']
+        scaler_y = obj['scaler_y']
+        
+        X_input = scaler_X.transform(X)
+        y_pred = model.predict(X_input)
+        y_pred = scaler_y.inverse_transform(y_pred)
+        #########
+
         return pd.DataFrame(y_pred, columns=['xAgua_pred', 'xEtanol_pred', 'xDEC_pred'])
+
            
          #########
         
