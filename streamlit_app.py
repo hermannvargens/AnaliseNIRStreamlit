@@ -83,9 +83,9 @@ def plotar_graf():
 
 #função para plotar RMSE
 # Título do app
-def plotar_rmse(linhas):
+def plotar_rmse(linhas, results_df):
 
-    results_df = pd.read_csv('resultados.csv')
+    #results_df = pd.read_csv('resultados.csv')
     # Ordenar pelo RMSE (Predito)
     results_df = results_df.iloc[linhas]
     results_df = results_df.sort_values(by='RMSE (Predito)', ascending=True).reset_index(drop=True)
@@ -208,10 +208,11 @@ def plot_residuos():
     plt.tight_layout()
     st.pyplot(fig)
 
-
-# Sidebar como menu
+#######################################################
+# Sidebar como menu#
+#######################################################
 st.sidebar.title("Menu")
-page = st.sidebar.selectbox("Escolha a página:", ["Início", "Preparação dos Dados", "Métodos", "Resultados", "Novas Predições"])
+page = st.sidebar.selectbox("Escolha a página:", ["Início", "Preparação dos Dados", "Métodos", "Resultados", "Stacking", "Novas Predições"])
 
 # Conteúdo principal muda conforme o menu
 if page == "Início":
@@ -244,20 +245,29 @@ elif page == "Resultados":
     results_df
 
     #Plotar RMSE de todos os modelos
+    results_df = pd.read_csv('resultados.csv')
     linhas=[0,1,2,3,4,5]
-    plotar_rmse(linhas)
+    plotar_rmse(linhas,results_df)
 
     st.write("Em detalhe os modelos com menores RMSE:")
     
     #Plotar RMSE apenas do SVR e PLS
+    results_df = pd.read_csv('resultados.csv')
     linhas=[0,4]
-    plotar_rmse(linhas)
+    plotar_rmse(linhas,results_df)
 
     st.write("Vemos que os modelos SVR e PLS não normalizados possuem os menores valores de RMSE.")
 
     plotar_realpredito()
 
     plot_residuos()
+
+elif page == "Stacking":
+    st.title("Stacking Regressor")
+    st.write("Uma vez escolhidos os modelos com melhores resultados, tentamos realizar um ensemble, do tipo Stacking, que consiste em realizar um novo ajuste unindo os modelos PLS e SVR em um modelo só, ajustados através de uma Regressão Linear, com a expectativa de que tal modelo possa apresentar resultados ainda melhores.")
+    
+    
+    
 
 
     
