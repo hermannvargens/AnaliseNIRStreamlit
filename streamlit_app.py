@@ -220,7 +220,7 @@ if page == "Início":
     st.write("Foram analisadas 75 amostras, pré-processadas com Savitzky-Golay, 7 pontos.")
 
     df = read_csv()
-    df
+    df.head(6)
 
     plotar_graf()
     
