@@ -83,10 +83,11 @@ def plotar_graf():
 
 #função para plotar RMSE
 # Título do app
-def plotar_rmse():
+def plotar_rmse(linhas):
 
     results_df = pd.read_csv('resultados.csv')
     # Ordenar pelo RMSE (Predito)
+    results_df = results_df.iloc[linhas]
     results_df = results_df.sort_values(by='RMSE (Predito)', ascending=True).reset_index(drop=True)
     
     #st.title("Comparação de RMSE - Modelos e Normalizações")
@@ -242,6 +243,8 @@ elif page == "Resultados":
     results_df = pd.read_csv('resultados.csv')
     results_df
 
+    
+    linhas=[0,1,2,3,4,5]
     plotar_rmse()
 
     plotar_realpredito()
