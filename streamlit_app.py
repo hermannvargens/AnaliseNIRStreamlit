@@ -115,11 +115,14 @@ def plotar_rmse(linhas, results_df):
 
 #Plotar scatterplot Real x Predito
 def plotar_realpredito(df):
-    # Título do app
-    st.subheader("Real x Predito")
-          
+
     # Criar a figura com subplots
     fig, axs = plt.subplots(1,3, figsize=(30,15))
+
+    # Tamanhos de fonte personalizados
+    title_fontsize = 20
+    label_fontsize = 18
+    tick_fontsize = 16
     
     # Gráfico 1 - xAgua
     axs[0].scatter(df['xAgua_test'], df['xAgua_pred'])
@@ -128,9 +131,10 @@ def plotar_realpredito(df):
         [df['xAgua_test'].min(), df['xAgua_test'].max()],
         'k--', lw=2
     )
-    axs[0].set_xlabel('xAgua (Test)')
-    axs[0].set_ylabel('xAgua (Pred)')
-    axs[0].set_title('xAgua')
+    axs[0].set_xlabel('xAgua (Test)', fontsize=label_fontsize)
+    axs[0].set_ylabel('xAgua (Pred)', fontsize=label_fontsize)
+    axs[0].set_title('xAgua', fontsize=title_fontsize)
+    axs[0].tick_params(axis='both', labelsize=tick_fontsize)
     
     # Gráfico 2 - xEtanol
     
@@ -140,9 +144,10 @@ def plotar_realpredito(df):
         [df['xEtanol_test'].min(), df['xEtanol_test'].max()],
         'k--', lw=2
     )
-    axs[1].set_xlabel('xEtanol (Test)')
-    axs[1].set_ylabel('xEtanol (Pred)')
-    axs[1].set_title('xEtanol')
+    axs[1].set_xlabel('xEtanol (Test)', fontsize=label_fontsize)
+    axs[1].set_ylabel('xEtanol (Pred)', fontsize=label_fontsize)
+    axs[1].set_title('xEtanol', fontsize=title_fontsize)
+    axs[1].tick_params(axis='both', labelsize=tick_fontsize)
     
     # Gráfico 3 - xDEC
     
@@ -152,9 +157,10 @@ def plotar_realpredito(df):
         [df['xDEC_test'].min(), df['xDEC_test'].max()],
         'k--', lw=2
     )
-    axs[2].set_xlabel('xDEC (Test)')
-    axs[2].set_ylabel('xDEC (Pred)')
-    axs[2].set_title('xDEC')
+    axs[2].set_xlabel('xDEC (Test)', fontsize=label_fontsize)
+    axs[2].set_ylabel('xDEC (Pred)', fontsize=label_fontsize)
+    axs[2].set_title('xDEC', fontsize=title_fontsize)
+    axs[2].tick_params(axis='both', labelsize=tick_fontsize)
     
     # Ajustar layout e exibir no Streamlit
     plt.tight_layout()
@@ -263,6 +269,9 @@ elif page == "Stacking":
     st.title("Stacking Regressor")
     st.write("Uma vez escolhidos os modelos com melhores resultados, tentamos realizar um ensemble, do tipo Stacking, que consiste em realizar um novo ajuste unindo os modelos PLS e SVR em um modelo só, ajustados através de uma Regressão Linear, com a expectativa de que tal modelo possa apresentar resultados ainda melhores.")
 
+    # Título do app
+    st.subheader("SVR: Real x Predito")
+    
     df_svr = pd.read_csv('df_pred_real_svr.csv')
     plotar_realpredito(df_svr) 
 
