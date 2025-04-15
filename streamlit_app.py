@@ -274,7 +274,19 @@ elif page == "Stacking":
     st.subheader("SVR: Real x Predito")
     
     df_svr = pd.read_csv('df_pred_real_svr.csv')
-    plotar_realpredito(df_svr) 
+    plotar_realpredito(df_svr)
+
+    # Título do app
+    st.subheader("PLS: Real x Predito")
+
+    df_pls = pd.read_csv('df_pred_real_pls.csv')
+    plotar_realpredito(df_pls)
+
+    # Título do app
+    st.subheader("Stacking: Real x Predito")
+
+    df_stacking = pd.read_csv('df_pred_real_stacking.csv')
+    plotar_realpredito(df_stacking) 
 
 
     
