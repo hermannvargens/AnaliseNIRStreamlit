@@ -120,9 +120,9 @@ def plotar_realpredito(df):
     fig, axs = plt.subplots(1,3, figsize=(30,15))
 
     # Tamanhos de fonte personalizados
-    title_fontsize = 20
-    label_fontsize = 18
-    tick_fontsize = 16
+    title_fontsize = 40
+    label_fontsize = 36
+    tick_fontsize = 32
     
     # Gráfico 1 - xAgua
     axs[0].scatter(df['xAgua_test'], df['xAgua_pred'])
