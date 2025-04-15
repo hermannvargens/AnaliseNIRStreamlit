@@ -371,14 +371,14 @@ elif page == "Novas Predições":
     
             return pd.DataFrame(y_pred, columns=['xAgua_pred', 'xEtanol_pred', 'xDEC_pred'])
         
-            st.write("Previsões com SVR")
-                
-            resultado_svr = prever_svr()
-            resultado_svr
-        
-            st.write("Previsões com PLS")
-            resultado_pls = prever_pls()
-            resultado_pls
+        st.write("Previsões com SVR")
+            
+        resultado_svr = prever_svr()
+        resultado_svr
+    
+        st.write("Previsões com PLS")
+        resultado_pls = prever_pls()
+        resultado_pls
 
            
          #########
