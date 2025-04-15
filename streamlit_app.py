@@ -315,12 +315,12 @@ elif page == "Novas Predições":
     def prever_svr():
         X = df.values
         y_pred = svr.predict(X)
-        return pd.DataFrame(y_pred, columns=['xAgua_pred', 'xEtanol_pred', 'xDEC_pred']))
+        return pd.DataFrame(y_pred, columns=['xAgua_pred', 'xEtanol_pred', 'xDEC_pred'])
 
     def prever_pls():
         X = df.values
         y_pred = pls.predict(X)
-        return pd.DataFrame(y_pred, columns=['xAgua_pred', 'xEtanol_pred', 'xDEC_pred']))
+        return pd.DataFrame(y_pred, columns=['xAgua_pred', 'xEtanol_pred', 'xDEC_pred'])
            
          #########
         
