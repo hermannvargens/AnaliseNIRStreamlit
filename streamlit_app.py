@@ -123,9 +123,10 @@ def plotar_realpredito(df):
     title_fontsize = 40
     label_fontsize = 36
     tick_fontsize = 32
+    point_size = 100  # Tamanho dos pontos do scatter
     
     # Gráfico 1 - xAgua
-    axs[0].scatter(df['xAgua_test'], df['xAgua_pred'])
+    axs[0].scatter(df['xAgua_test'], df['xAgua_pred'], s=point_size)
     axs[0].plot(
         [df['xAgua_test'].min(), df['xAgua_test'].max()],
         [df['xAgua_test'].min(), df['xAgua_test'].max()],
@@ -138,7 +139,7 @@ def plotar_realpredito(df):
     
     # Gráfico 2 - xEtanol
     
-    axs[1].scatter(df['xEtanol_test'], df['xEtanol_pred'])
+    axs[1].scatter(df['xEtanol_test'], df['xEtanol_pred'], s=point_size )
     axs[1].plot(
         [df['xEtanol_test'].min(), df['xEtanol_test'].max()],
         [df['xEtanol_test'].min(), df['xEtanol_test'].max()],
@@ -151,7 +152,7 @@ def plotar_realpredito(df):
     
     # Gráfico 3 - xDEC
     
-    axs[2].scatter(df['xDEC_test'], df['xDEC_pred'])
+    axs[2].scatter(df['xDEC_test'], df['xDEC_pred'], s=point_size)
     axs[2].plot(
         [df['xDEC_test'].min(), df['xDEC_test'].max()],
         [df['xDEC_test'].min(), df['xDEC_test'].max()],
