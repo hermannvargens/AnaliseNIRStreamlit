@@ -336,7 +336,7 @@ elif page == "Novas Predições":
     st.write("Se não tiver, clique aqui para baixar um exemplo!")
     st.markdown(
     """
-    👉 [Clique aqui para baixar o arquivo](https://raw.githubusercontent.com/usuario/repositorio/branch/caminho/do/arquivo.txt)
+    👉 [Clique aqui para baixar o arquivo](https://raw.githubusercontent.com/hermannvargens/AnaliseNIRStreamlit/refs/heads/main/amostra0.csv)
     """,
     unsafe_allow_html=True
 )
