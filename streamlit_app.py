@@ -243,9 +243,17 @@ elif page == "Resultados":
     results_df = pd.read_csv('resultados.csv')
     results_df
 
-    
+    #Plotar RMSE de todos os modelos
     linhas=[0,1,2,3,4,5]
     plotar_rmse(linhas)
+
+    st.write("Em detalhe os modelos com menores RMSE:")
+    
+    #Plotar RMSE apenas do SVR e PLS
+    linhas=[0,4]
+    plotar_rmse(linhas)
+
+    st.write("Vemos que os modelos SVR e PLS não normalizados possuem os menores valores de RMSE."
 
     plotar_realpredito()
 
