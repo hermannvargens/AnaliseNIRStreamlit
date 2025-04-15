@@ -309,41 +309,42 @@ elif page == "Stacking":
 
 elif page == "Novas Predições":
 
-# Título do app
-st.title("Predição com Modelo Stacking")
-
-# Upload da amostra
-uploaded_file = st.file_uploader("Envie a amostra espectral (.csv)", type="csv")
-
-if uploaded_file is not None:
-    # Ler o arquivo enviado
-    espectro = pd.read_csv(uploaded_file)
-
-    # Mostrar os dados carregados
-    st.subheader("Amostra Carregada")
-    st.write(espectro)
-
-    # Carregar o modelo
-    modelo_carregado = joblib.load('stacking.pkl')
-
-    # Inicializar meta-features (2 modelos * n_outputs)
-    meta_features = np.zeros((1, 2 * modelo_carregado['n_outputs']))
-
-    # Gerar meta-features usando PLS e SVR
-    for output_idx in range(modelo_carregado['n_outputs']):
-        # Modelo PLS
-        meta_features[0, 2 * output_idx] = modelo_carregado['pls'].predict(espectro)[:, output_idx]
+    # Título do app
+    st.title("Predição com Modelo Stacking")
+    
+    # Upload da amostra
+    uploaded_file = st.file_uploader("Envie a amostra espectral (.csv)", type="csv")
+    
+    if uploaded_file is not None:
         
-        # Modelo SVR
-        meta_features[0, 2 * output_idx + 1] = modelo_carregado['svr'].predict(espectro)[:, output_idx]
-
-    # Predição final com o meta-modelo
-    y_pred = modelo_carregado['meta_model'].predict(meta_features)
-
-    # Mostrar resultados
-    st.subheader("Predição para a nova amostra:")
-    for i in range(modelo_carregado['n_outputs']):
-        st.write(f"🔹 Componente {i+1}: **{y_pred[0, i]:.4f}**")
-
+        # Ler o arquivo enviado
+        espectro = pd.read_csv(uploaded_file)
     
+        # Mostrar os dados carregados
+        st.subheader("Amostra Carregada")
+        st.write(espectro)
     
+        # Carregar o modelo
+        modelo_carregado = joblib.load('stacking.pkl')
+    
+        # Inicializar meta-features (2 modelos * n_outputs)
+        meta_features = np.zeros((1, 2 * modelo_carregado['n_outputs']))
+    
+        # Gerar meta-features usando PLS e SVR
+        for output_idx in range(modelo_carregado['n_outputs']):
+            # Modelo PLS
+            meta_features[0, 2 * output_idx] = modelo_carregado['pls'].predict(espectro)[:, output_idx]
+            
+            # Modelo SVR
+            meta_features[0, 2 * output_idx + 1] = modelo_carregado['svr'].predict(espectro)[:, output_idx]
+    
+        # Predição final com o meta-modelo
+        y_pred = modelo_carregado['meta_model'].predict(meta_features)
+    
+        # Mostrar resultados
+        st.subheader("Predição para a nova amostra:")
+        for i in range(modelo_carregado['n_outputs']):
+            st.write(f"🔹 Componente {i+1}: **{y_pred[0, i]:.4f}**")
+    
+        
+        
