@@ -333,7 +333,13 @@ elif page == "Novas Predições":
 
     # Título do app
     st.subheader("Faça o upload de arquivo CSV contendo o espectro da amostra para realizar uma nova predição.")
-    
+    st.write("Se não tiver, clique aqui para baixar um exemplo!")
+    st.markdown(
+    """
+    👉 [Clique aqui para baixar o arquivo](https://raw.githubusercontent.com/usuario/repositorio/branch/caminho/do/arquivo.txt)
+    """,
+    unsafe_allow_html=True
+)
     # Upload da amostra
     uploaded_file = st.file_uploader("Envie a amostra espectral (.csv)", type="csv")
 
