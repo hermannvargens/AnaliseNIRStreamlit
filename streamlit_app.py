@@ -238,7 +238,7 @@ def plotar_espectro_carregado(df):
 # Sidebar como menu#
 #######################################################
 st.sidebar.title("Menu")
-page = st.sidebar.selectbox("Escolha a página:", ["Início", "Preparação dos Dados", "Métodos", "Resultados Iniciais", "Stacking", "Novas Predições"])
+page = st.sidebar.selectbox("Escolha a página:", ["Início", "Preparação dos Dados", "Métodos", "Resultados Iniciais", "Resultados Finais", "Novas Predições"])
 
 # Conteúdo principal muda conforme o menu
 if page == "Início":
@@ -285,8 +285,9 @@ elif page == "Resultados Iniciais":
     st.write("Vemos que os modelos SVR e PLS não normalizados possuem os menores valores de RMSE.")
 
 
-elif page == "Stacking":
-    st.title("Stacking Regressor")
+elif page == "Resultados Finais":
+    st.title("Resultados Finais")
+    st.subheader("Stacking Regressor")
     st.write("Uma vez escolhidos os modelos com melhores resultados, tentamos realizar um ensemble, do tipo Stacking, que consiste em realizar um novo ajuste unindo os modelos PLS e SVR em um modelo só, ajustados através de uma Regressão Linear, com a expectativa de que tal modelo possa apresentar resultados ainda melhores.")
 
     results_df = pd.read_csv('resultados.csv')
