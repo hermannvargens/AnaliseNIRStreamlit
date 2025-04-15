@@ -305,57 +305,28 @@ elif page == "Novas Predições":
     
     # Upload da amostra
     uploaded_file = st.file_uploader("Envie a amostra espectral (.csv)", type="csv")
+    
+    df = process_csv(uploaded_file)
+    st.write("Dados carregados:")
+    st.write(df)
+    svr = joblib.load('svr_nao_normalizado.joblib')
+    pls = joblib.load('pls_nao_normalizado.joblib')
 
-    model = joblib.load('svr_nao_normalizado.joblib')
-    
-    if uploaded_file is not None:
-            # Processar o arquivo CSV
-            df = process_csv(uploaded_file)
-            st.write("Dados carregados:")
-            st.write(df)
+    def prever_svr():
+        X = df.values
+        y_pred = svr.predict(X)
+        return pd.DataFrame(y_pred, columns=['xAgua_pred', 'xEtanol_pred', 'xDEC_pred']))
+
+    def prever_pls():
+        X = df.values
+        y_pred = pls.predict(X)
+        return pd.DataFrame(y_pred, columns=['xAgua_pred', 'xEtanol_pred', 'xDEC_pred']))
+           
+         #########
         
-            X = df.values
-            y_pred = model.predict(X) # se não for normalizado
-        
-            #########se for normalizado
-            #obj = joblib.load('pls_normalizado.joblib')
-            #model = obj['model']
-            #scaler_X = obj['scaler_X']
-            #scaler_y = obj['scaler_y']
-            
-            #X_input = scaler_X.transform(X)
-            #y_pred = model.predict(X_input)
-            #y_pred = scaler_y.inverse_transform(y_pred)
-            #########
-        
-            # Plotar espectro no Streamlit
-            st.subheader("Gráfico do Espectro ")
-            
-            step = 5
-            x_values = np.arange(0, len(df.columns), step)
-            x_labels = [str(i) for i in range(0, len(df.columns), step)]
-            
-            fig, ax = plt.subplots(figsize=(10, 6))
-            ax.plot(df.iloc[0, :])
-            
-            ax.set_xticks(x_values)
-            ax.set_xticklabels(x_labels, rotation=45, ha="right")
-            
-            ax.grid(True)
-            ax.set_title("Espectro")
-            ax.set_xlabel("Absorvância")
-            ax.set_ylabel("Wavelength (nm)")
-            
-            plt.tight_layout()
-            
-            # Exibir o gráfico no Streamlit
-            st.pyplot(fig)
-        
-             # Exibir previsões
-            st.subheader("Previsões feitas pelo modelo (xÁgua, xEtanol, xDEC):")
-            st.dataframe(pd.DataFrame(y_pred, columns=['xAgua_pred', 'xEtanol_pred', 'xDEC_pred']))
-    
-            
+    prever_svr()
+
+    prever_pls()
         
             
             
