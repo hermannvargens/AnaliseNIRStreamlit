@@ -119,7 +119,7 @@ def plotar_realpredito(df):
     st.subheader("Real x Predito")
           
     # Criar a figura com subplots
-    fig, axs = plt.subplots(3, 1, figsize=(15, 30))
+    fig, axs = plt.subplots(1,3, figsize=(30,15))
     
     # Gráfico 1 - xAgua
     axs[0].scatter(df['xAgua_test'], df['xAgua_pred'])
