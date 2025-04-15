@@ -306,61 +306,44 @@ elif page == "Stacking":
 
 
     
-# Você pode adicionar sliders, selects, gráficos, etc.
+
 elif page == "Novas Predições":
-    st.title("Novas Predições")
-    st.write("Aplicação de regressão usando Streamlit.")
-    # Carregar o modelo PLS
-    model = load_model()
-    
-    # Upload do arquivo CSV
-    uploaded_file = st.file_uploader("Carregue o arquivo CSV com os dados de entrada", type=["csv"])
-    
-    if uploaded_file is not None:
-        # Processar o arquivo CSV
-        df = process_csv(uploaded_file)
-        st.write("Dados carregados:")
-        st.write(df)
-    
-        X = df.values
-        #y_pred = model.predict(X) # se não for normalizado
-    
-        #########se for normalizado
-        obj = joblib.load('pls_normalizado.joblib')
-        model = obj['model']
-        scaler_X = obj['scaler_X']
-        scaler_y = obj['scaler_y']
+
+# Título do app
+st.title("Predição com Modelo Stacking")
+
+# Upload da amostra
+uploaded_file = st.file_uploader("Envie a amostra espectral (.csv)", type="csv")
+
+if uploaded_file is not None:
+    # Ler o arquivo enviado
+    espectro = pd.read_csv(uploaded_file)
+
+    # Mostrar os dados carregados
+    st.subheader("Amostra Carregada")
+    st.write(espectro)
+
+    # Carregar o modelo
+    modelo_carregado = joblib.load('stacking.pkl')
+
+    # Inicializar meta-features (2 modelos * n_outputs)
+    meta_features = np.zeros((1, 2 * modelo_carregado['n_outputs']))
+
+    # Gerar meta-features usando PLS e SVR
+    for output_idx in range(modelo_carregado['n_outputs']):
+        # Modelo PLS
+        meta_features[0, 2 * output_idx] = modelo_carregado['pls'].predict(espectro)[:, output_idx]
         
-        X_input = scaler_X.transform(X)
-        y_pred = model.predict(X_input)
-        y_pred = scaler_y.inverse_transform(y_pred)
-        #########
-    
-        # Plotar espectro no Streamlit
-        st.subheader("Gráfico do Espectro ")
-        
-        step = 5
-        x_values = np.arange(0, len(df.columns), step)
-        x_labels = [str(i) for i in range(0, len(df.columns), step)]
-        
-        fig, ax = plt.subplots(figsize=(10, 6))
-        ax.plot(df.iloc[0, :])
-        
-        ax.set_xticks(x_values)
-        ax.set_xticklabels(x_labels, rotation=45, ha="right")
-        
-        ax.grid(True)
-        ax.set_title("Espectro")
-        ax.set_xlabel("Absorvância")
-        ax.set_ylabel("Wavelength (nm)")
-        
-        plt.tight_layout()
-        
-        # Exibir o gráfico no Streamlit
-        st.pyplot(fig)
-    
-         # Exibir previsões
-        st.subheader("Previsões feitas pelo modelo (xÁgua, xEtanol, xDEC):")
-        st.dataframe(pd.DataFrame(y_pred, columns=['xAgua_pred', 'xEtanol_pred', 'xDEC_pred']))
+        # Modelo SVR
+        meta_features[0, 2 * output_idx + 1] = modelo_carregado['svr'].predict(espectro)[:, output_idx]
+
+    # Predição final com o meta-modelo
+    y_pred = modelo_carregado['meta_model'].predict(meta_features)
+
+    # Mostrar resultados
+    st.subheader("Predição para a nova amostra:")
+    for i in range(modelo_carregado['n_outputs']):
+        st.write(f"🔹 Componente {i+1}: **{y_pred[0, i]:.4f}**")
+
     
     
