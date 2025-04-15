@@ -220,7 +220,7 @@ if page == "Início":
     st.write("Foram analisadas 75 amostras, pré-processadas com Savitzky-Golay, 7 pontos.")
 
     df = read_csv()
-    st.dataframe(results_df.head(3))
+    
 
     plotar_graf()
     
@@ -242,7 +242,7 @@ elif page == "Resultados":
     st.title("Resultados")
     st.subheader("Métricas")
     results_df = pd.read_csv('resultados.csv')
-    results_df
+    st.dataframe(results_df.head(3))
 
     #Plotar RMSE de todos os modelos
     results_df = pd.read_csv('resultados.csv')
