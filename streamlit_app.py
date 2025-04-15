@@ -253,7 +253,7 @@ elif page == "Resultados":
     linhas=[0,4]
     plotar_rmse(linhas)
 
-    st.write("Vemos que os modelos SVR e PLS não normalizados possuem os menores valores de RMSE."
+    st.write("Vemos que os modelos SVR e PLS não normalizados possuem os menores valores de RMSE.")
 
     plotar_realpredito()
 
