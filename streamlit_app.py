@@ -300,17 +300,20 @@ elif page == "Stacking":
 
 elif page == "Novas Predições":
 
+    svr = joblib.load('svr_nao_normalizado.joblib')
+    pls = joblib.load('pls_nao_normalizado.joblib')
+
     # Título do app
     st.title("Predição com Modelo Stacking")
     
     # Upload da amostra
     uploaded_file = st.file_uploader("Envie a amostra espectral (.csv)", type="csv")
-    
-    df = process_csv(uploaded_file)
-    st.write("Dados carregados:")
-    st.write(df)
-    svr = joblib.load('svr_nao_normalizado.joblib')
-    pls = joblib.load('pls_nao_normalizado.joblib')
+
+    if uploaded_file is not None:
+        df = process_csv(uploaded_file)
+        st.write("Dados carregados:")
+        st.write(df)
+
 
     def prever_svr():
         X = df.values
@@ -326,6 +329,9 @@ elif page == "Novas Predições":
         
     resultado_svr = prever_svr()
     resultado_svr
+
+    resultado_pls = prever_pls()
+    resultado_pls
     
         
             
