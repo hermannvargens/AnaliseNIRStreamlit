@@ -265,7 +265,7 @@ elif page == "Stacking":
     st.write("Uma vez escolhidos os modelos com melhores resultados, tentamos realizar um ensemble, do tipo Stacking, que consiste em realizar um novo ajuste unindo os modelos PLS e SVR em um modelo só, ajustados através de uma Regressão Linear, com a expectativa de que tal modelo possa apresentar resultados ainda melhores.")
 
     df_svr = pd.read_csv('df_pred_real_svr.csv')
-    plotar_realpredito(df_svr):    
+    plotar_realpredito(df_svr) 
 
 
     
