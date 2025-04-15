@@ -209,6 +209,31 @@ def plot_residuos(df):
     plt.tight_layout()
     st.pyplot(fig)
 
+def plotar_espectro_carregado(df):
+    # Plotar espectro no Streamlit
+    st.subheader("Gráfico do Espectro ")
+    
+    step = 5
+    x_values = np.arange(0, len(df.columns), step)
+    x_labels = [str(i) for i in range(0, len(df.columns), step)]
+    
+    fig, ax = plt.subplots(figsize=(10, 6))
+    ax.plot(df.iloc[0, :])
+    
+    ax.set_xticks(x_values)
+    ax.set_xticklabels(x_labels, rotation=45, ha="right")
+    
+    ax.grid(True)
+    ax.set_title("Espectro")
+    ax.set_xlabel("Absorvância")
+    ax.set_ylabel("Wavelength (nm)")
+    
+    plt.tight_layout()
+    
+    # Exibir o gráfico no Streamlit
+    st.pyplot(fig)
+
+
 #######################################################
 # Sidebar como menu#
 #######################################################
@@ -313,6 +338,7 @@ elif page == "Novas Predições":
         df = process_csv(uploaded_file)
         st.write("Dados carregados:")
         st.write(df)
+        plotar_espectro_carregado(df)
 
 
     def prever_svr():
@@ -338,10 +364,13 @@ elif page == "Novas Predições":
 
            
          #########
+
+    st.write("Previsões com SVR")
         
     resultado_svr = prever_svr()
     resultado_svr
 
+    st.write("Previsões com PLS")
     resultado_pls = prever_pls()
     resultado_pls
     
