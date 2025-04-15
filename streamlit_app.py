@@ -325,7 +325,7 @@ elif page == "Novas Predições":
         st.write(espectro)
     
         # Carregar o modelo
-        modelo_carregado = joblib.load('stacking.pkl')
+        modelo_carregado = joblib.load('stacking.joblib')
     
         # Inicializar meta-features (2 modelos * n_outputs)
         meta_features = np.zeros((1, 2 * modelo_carregado['n_outputs']))
