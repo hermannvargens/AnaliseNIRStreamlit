@@ -114,20 +114,18 @@ def plotar_rmse(linhas, results_df):
     st.pyplot(fig)
 
 #Plotar scatterplot Real x Predito
-def plotar_realpredito():
+def plotar_realpredito(df):
     # Título do app
     st.subheader("Real x Predito")
-    
-    df_svr_nao_normalizado = pd.read_csv('df_pred_real_svr.csv')
-    
+          
     # Criar a figura com subplots
     fig, axs = plt.subplots(3, 1, figsize=(15, 30))
     
     # Gráfico 1 - xAgua
     axs[0].scatter(df_svr_nao_normalizado['xAgua_test'], df_svr_nao_normalizado['xAgua_pred'])
     axs[0].plot(
-        [df_svr_nao_normalizado['xAgua_test'].min(), df_svr_nao_normalizado['xAgua_test'].max()],
-        [df_svr_nao_normalizado['xAgua_test'].min(), df_svr_nao_normalizado['xAgua_test'].max()],
+        [df['xAgua_test'].min(), df['xAgua_test'].max()],
+        [df['xAgua_test'].min(), df['xAgua_test'].max()],
         'k--', lw=2
     )
     axs[0].set_xlabel('xAgua (Test)')
@@ -136,10 +134,10 @@ def plotar_realpredito():
     
     # Gráfico 2 - xEtanol
     
-    axs[1].scatter(df_svr_nao_normalizado['xEtanol_test'], df_svr_nao_normalizado['xEtanol_pred'])
+    axs[1].scatter(df['xEtanol_test'], df['xEtanol_pred'])
     axs[1].plot(
-        [df_svr_nao_normalizado['xEtanol_test'].min(), df_svr_nao_normalizado['xEtanol_test'].max()],
-        [df_svr_nao_normalizado['xEtanol_test'].min(), df_svr_nao_normalizado['xEtanol_test'].max()],
+        [df['xEtanol_test'].min(), df['xEtanol_test'].max()],
+        [df['xEtanol_test'].min(), df['xEtanol_test'].max()],
         'k--', lw=2
     )
     axs[1].set_xlabel('xEtanol (Test)')
@@ -148,10 +146,10 @@ def plotar_realpredito():
     
     # Gráfico 3 - xDEC
     
-    axs[2].scatter(df_svr_nao_normalizado['xDEC_test'], df_svr_nao_normalizado['xDEC_pred'])
+    axs[2].scatter(df['xDEC_test'], df['xDEC_pred'])
     axs[2].plot(
-        [df_svr_nao_normalizado['xDEC_test'].min(), df_svr_nao_normalizado['xDEC_test'].max()],
-        [df_svr_nao_normalizado['xDEC_test'].min(), df_svr_nao_normalizado['xDEC_test'].max()],
+        [df['xDEC_test'].min(), df['xDEC_test'].max()],
+        [df['xDEC_test'].min(), df['xDEC_test'].max()],
         'k--', lw=2
     )
     axs[2].set_xlabel('xDEC (Test)')
@@ -265,9 +263,9 @@ elif page == "Resultados":
 elif page == "Stacking":
     st.title("Stacking Regressor")
     st.write("Uma vez escolhidos os modelos com melhores resultados, tentamos realizar um ensemble, do tipo Stacking, que consiste em realizar um novo ajuste unindo os modelos PLS e SVR em um modelo só, ajustados através de uma Regressão Linear, com a expectativa de que tal modelo possa apresentar resultados ainda melhores.")
-    
-    
-    
+
+    df_svr = pd.read_csv('df_pred_real_svr.csv')
+    plotar_realpredito(df_svr):    
 
 
     
