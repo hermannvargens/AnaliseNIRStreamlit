@@ -332,7 +332,7 @@ elif page == "Novas Predições":
     pls = joblib.load('pls_normalizado.joblib')
 
     # Título do app
-    st.title("Predição com Modelo Stacking")
+    st.subheader("Faça o upload de arquivo CSV contendo o espectro da amostra para realizar uma nova predição.")
     
     # Upload da amostra
     uploaded_file = st.file_uploader("Envie a amostra espectral (.csv)", type="csv")
