@@ -293,6 +293,9 @@ elif page == "Resultados Finais":
     st.write("Uma vez escolhidos os modelos com melhores resultados, tentamos realizar um ensemble, do tipo Stacking, que consiste em realizar um novo ajuste unindo os modelos PLS e SVR em um modelo só, ajustados através de uma Regressão Linear, com a expectativa de que tal modelo possa apresentar resultados ainda melhores.")
 
     results_df = pd.read_csv('resultados.csv')
+    st.table(results_df.loc[[0,4,6]])
+    
+    results_df = pd.read_csv('resultados.csv')
     linhas=[0,4,6]
     plotar_rmse(linhas,results_df)
 
