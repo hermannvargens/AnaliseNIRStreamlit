@@ -235,7 +235,7 @@ def plotar_espectro_carregado(df):
 
 
 #######################################################
-# Sidebar como menu#
+# Sidebar como menu #
 #######################################################
 st.sidebar.title("Menu")
 page = st.sidebar.selectbox("Escolha a página:", ["Início", "Preparação dos Dados", "Métodos", "Resultados Iniciais", "Resultados Finais", "Novas Predições"])
@@ -299,7 +299,7 @@ elif page == "Resultados Finais":
     linhas=[0,4,6]
     plotar_rmse(linhas,results_df)
 
-    st.write("Vemos que o meta-modelo apresentou resultados ligeiramente melhores que os demais modelos isolados.")
+    st.write("Vemos que o meta-modelo composto dos modelos PLS e NVR não apresentou resultados significativamente melhores que os demais modelos isolados.")
 
     # Título do app
     st.subheader("SVR: Real x Predito")
