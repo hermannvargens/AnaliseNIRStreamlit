@@ -7,7 +7,7 @@ import matplotlib.pyplot as plt
 # Função para carregar o modelo PLS salvo
 @st.cache_resource
 
-# Função para processar o arquivo CSV com o mesmo pré-processamento usado no Jupyter
+# Função para processar o arquivo CSV 
 def process_csv(file):
     df = pd.read_csv(file)
     
@@ -246,6 +246,8 @@ if page == "Início":
     st.write("Foram analisadas 75 amostras, pré-processadas com Savitzky-Golay, 7 pontos.")
 
     df = read_csv()
+
+    df
     
 
     plotar_graf()
