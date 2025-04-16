@@ -48,7 +48,6 @@ def read_csv():
 #Função para plotar o gráfico do arquivo CSV usado para a modelagem
 # Título do app
 def plotar_graf():
-    st.title("Visualização de Dados Espectrais")
 
     # Carregar o dataframe
     df = read_csv()
@@ -58,7 +57,8 @@ def plotar_graf():
     df_espectros = df_espectros.T  # Transpor para ter comprimentos de onda no eixo X
     
     # Gráfico
-    st.subheader("Gráfico de Absorbância por Comprimento de Onda")
+   
+    st.subheader("Visualização de Dados Espectrais")
     
     fig, ax = plt.subplots(figsize=(10, 5))
     
